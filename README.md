@@ -50,5 +50,5 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 5) login.html : 로그인 페이지 
 6) register.html : 회원가입 페이지 
 
-<h4>3. static</h4>
+<h4>3. /static/</h4>
 각 html 파일과 연결되는 js 파일과 css 파일들이 존재한다.
