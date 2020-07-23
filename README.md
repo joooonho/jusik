@@ -43,6 +43,7 @@ request로 신문 기사, 주가 정보를 스크랩하여 beatifulsoup으로 �
 flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <h4>2. /templates/</h4>
+
 1) articles.html : 관심 기사들을 보여주는 페이지 
 2) dashboard.html : 주식 종목의 차트를 보여주고, 모의 매수 매도가 가능한 페이지
 3) index.html : 메인 페이지로서 인베스팅 닷컴에서 가져온 기사와 다우, 나스닥 지수를 보여주고, 종목 검색이 가능한 페이지 
