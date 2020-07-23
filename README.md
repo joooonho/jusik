@@ -40,6 +40,7 @@ request로 신문 기사, 주가 정보를 스크랩하여 beatifulsoup으로 �
 <h2><li>파일 구조 설명</li></h2>
 
 <h4>1. app.py</h4>
+
 flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <h4>2. /templates/</h4>
@@ -52,4 +53,5 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 6) register.html : 회원가입 페이지 
 
 <h4>3. /static/</h4>
+
 각 html 파일과 연결되는 js 파일과 css 파일들이 존재한다.
