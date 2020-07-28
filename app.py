@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from bson import ObjectId
 
 from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+from datetime import datetime, timedelta
+
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbsparta                      # 'dbsparta'라는 이름의 db를 만듭니다.
 
@@ -67,6 +69,11 @@ def register():
 @app.route('/articles.html')
 def articles_html():
     return render_template('articles.html')
+
+@app.route('/board.html')
+def board():
+    return render_template('board.html')
+
 
 #################################
 ##  로그인을 위한 API            ##
@@ -153,6 +160,49 @@ def api_valid():
       return jsonify({'result': 'fail', 'msg':'로그인 시간이 만료되었습니다.'})
 
 ###########################################################################
+################################################################# 게시판 api
+
+@app.route('/message', methods=["GET"])
+def get_messages():
+    #date_now = datetime.datetime.now()
+    #date_before = date_now - timedelta(days=1)
+    #messages = list(db.messages.find({'created_at': {
+    #                '$gte': date_before, '$lte': date_now}}, {'_id': False}).sort('created_at', -1))
+    
+    messages = list(db.messages.find({}, {'_id':0}).sort('created_at', -1))
+    
+    return jsonify({'result': 'success', 'messages': messages})
+
+
+@app.route('/message', methods=["POST"])
+def set_message():
+    username_receive = request.form['username_give']
+    contents_receive = request.form['contents_give']
+
+    doc = {
+        'username': username_receive,
+        'contents': contents_receive,
+        'created_at': datetime.datetime.now()
+    }
+
+    db.messages.insert_one(doc)
+
+    return jsonify({'result': 'success', 'msg': '메시지 작성에 성공하였습니다!'})
+
+
+@app.route('/message/edit', methods=["POST"])
+def edit_message():
+    username_receive = request.form['username_give']
+    contents_receive = request.form['contents_give']
+
+    db.messages.update_one({'username': username_receive}, {
+                           '$set': {'contents': contents_receive, 'created_at': datetime.datetime.now()}})
+
+    return jsonify({'result': 'success', 'msg': '메시지 변경에 성공하였습니다!'})
+
+
+##############################################################################################
+
 
 
 #기사 html에 보여주기
