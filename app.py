@@ -9,6 +9,13 @@ from bson import ObjectId
 from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
 from datetime import datetime, timedelta
 
+###################### 이메일 인증 위한 패키지 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from random import randint
+######################
+
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbsparta                      # 'dbsparta'라는 이름의 db를 만듭니다.
 
@@ -82,11 +89,59 @@ def board():
 # [회원가입 API]
 # id, pw, nickname을 받아서, mongoDB에 저장합니다.
 # 저장하기 전에, pw를 sha256 방법(=단방향 암호화. 풀어볼 수 없음)으로 암호화해서 저장합니다.
+
+#이메일 인증
+@app.route('/api/email_auth', methods=['POST'])
+def api_auth():
+
+    me = "butcher3130@gmail.com"
+    my_password = "foavkq250"
+    
+    you = request.form['email_give']
+    id_receive = request.form['id_give']
+    nickname_receive = request.form['nickname_give']
+
+    ######## 동일한 이메일 주소가 db에 있는지 검색
+    if len(list(db.user.find({'email' : you}))) != 0 :
+        return ({'result' : 'fail', 'msg' : '해당 email로 가입한 기록이 있습니다.'})
+    elif len(list(db.user.find({'id' : id_receive}))) != 0 :
+        return ({'result' : 'fail', 'msg' : '해당 id가 이미 존재합니다.'})
+    elif len(list(db.user.find({'nick' : nickname_receive}))) != 0 :
+        return ({'result' : 'fail', 'msg' : '해당 닉네임이 이미 존재합니다.'})
+    ########
+
+    ## 여기서부터 코드를 작성하세요.
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = "이메일 인증"
+    msg['From'] = me
+    msg['To'] = you
+
+    #html = '<html><body><p>Hi, I have the following alerts for you!' + str(randint(1000, 9999)) +'</p></body></html>'
+    temp = str(randint(1000, 9999))
+    html = '인증 번호 : ' + temp
+    part2 = MIMEText(html, 'html')
+
+    msg.attach(part2)
+    ## 여기에서 코드 작성이 끝납니다. 
+
+    # Gmail 관련 필요한 정보를 획득합니다.
+    s = smtplib.SMTP_SSL('smtp.gmail.com')
+    # Gmail에 로그인합니다. 
+    s.login(me, my_password)
+    # 메일을 전송합니다.
+    s.sendmail(me, you, msg.as_string())
+    # 프로그램을 종료합니다.
+    s.quit()
+
+    
+    return jsonify({'result': 'success', 'number' : temp})
+
 @app.route('/api/register', methods=['POST'])
 def api_register():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
     nickname_receive = request.form['nickname_give']
+    email_receive = request.form['email_give']
 
     ######기존에 있는 id 혹은 닉네임인지 확인
     if len(list(db.user.find({'id' : id_receive}))) != 0 :
@@ -97,7 +152,7 @@ def api_register():
 
     pw_hash = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    db.user.insert_one({'id':id_receive,'pw':pw_hash,'nick':nickname_receive})
+    db.user.insert_one({'id':id_receive,'pw':pw_hash,'nick':nickname_receive, 'email':email_receive})
     
     return jsonify({'result': 'success'})
 

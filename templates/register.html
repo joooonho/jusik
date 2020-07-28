@@ -24,7 +24,7 @@
   </head>
   <body>
     <h1>회원가입 페이지</h1>
-    <div>
+    <div id = "user">
       <div class="form-group">
         <label for="userid">ID</label>
         <input type="text" class="form-control" id="userid" aria-describedby="emailHelp" placeholder="My ID">
@@ -37,7 +37,11 @@
         <label for="userpw">NICKNAME</label>
         <input type="text" class="form-control" id="usernick" placeholder="My Nickname">
       </div>
-      <button class="btn btn-primary" onclick="register()">회원가입</button>
+      <div class="form-group">
+        <label for="userpw">EMAIL</label>
+        <input type="text" class="form-control" id="useremail" placeholder="My Email">
+      </div>
+      <button id = "email_auth_button" class="btn btn-primary" onclick="email_auth()">이메일 인증</button>
     </div>
   </body>
 </html>
