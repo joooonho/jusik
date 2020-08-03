@@ -18,5 +18,12 @@
   
   <br>
   
-  ![screenshot2](/이미지/0803-2.PNG)
+  위의 스크린샷을 보면 form action = "/dashboard" 라고 되어있다. 이는 
+  dashboard 페이지로 이동한다는 것을 의미한다. 
+  "/dashboard"에 넘겨주는 값은 종목 코드인 "${symbol}" 이다.
   
+  <br>
+  
+  ![screenshot2](/설명/이미지/0803-2.PNG)
+  <br>
+  이전 페이지로부터 넘겨받은 데이터 symbol을 {{ result['symbol'] }}로 사용한다.
