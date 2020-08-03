@@ -8,6 +8,6 @@
 * 문법
   <br>
   
-  - "<form action = "URL">"
+  - `<form action = "URL">`
   - URL은 form data를 서버로 보낼 때, 해당 데이터가 도착할 URL
 
