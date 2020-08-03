@@ -14,7 +14,7 @@
 * 설명
   <br>
   
-  ![screenshot1](/이미지/0803-1.PNG)
+  ![screenshot1](/설명/이미지/0803-1.PNG)
   
   <br>
   
