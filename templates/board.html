@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스파르타코딩클럽 | 새가 날아든다</title>
+    <title>메모장</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -18,6 +18,27 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 쿠키 사용을 위한 Jquery-cookie 임포트 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
     <script>
         $(document).ready(function () {
             getMessages();
@@ -34,10 +55,12 @@
                         let messages = response['messages'];
                         for (let i = 0; i < messages.length; i++) {
                             let message = messages[i];
+                            let id = message['_id']
                             let username = message['username'];
                             let contents = message['contents'];
                             let created_at = message['created_at'];
-                            addHTML(username, contents, created_at, i);
+
+                            addHTML(username, contents, created_at, i, id);
                         }
                     } else {
                         alert('메시지를 불러오는데 실패했습니다.');
@@ -46,25 +69,58 @@
             });
         }
 
-        function addHTML(username, contents, created_at, i) {
-            let tempHtml = makeMessage(username, contents, created_at);
+        function addHTML(username, contents, created_at, i, id) {
+            let tempHtml = makeMessage(username, contents, created_at, id);
             $('#cards-box').append(tempHtml);
         }
 
-        function makeMessage(username, contents, created_at, i) {
+        function makeMessage(username, contents, created_at, id) {
             return `<div class="card custom-card">
                         <div class="card-body">
                             <textarea id="${username}-textarea" class="area-edit" cols="80"></textarea>
                             <h5 id="${username}-contents" class="card-title">${contents}</h5>
                             <h6 id="${username}-username"class="card-subtitle mb-2 text-muted">${username}</h6>
-                            <h6 class="card-subtitle mb-2 text-muted">${created_at}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">${created_at}</h6> 
                         </div>
                         <footer class="card-footer">
                             <a id="${username}-edit" href="#" class="card-footer-item" onclick="editPost('${username}')">수정</a>
+                            <button id = "${id}" onclick="deletes(this.id,'${username}')">삭제</button> 
                             <a id="${username}-cancel" href="#" class="card-footer-item area-edit" onclick="hideEdits('${username}')">취소</a>
                             <a id="${username}-submit" href="#" class="card-footer-item area-edit" onclick="submitEdit('${username}')">수정완료</a>
                         </footer>
                     </div>`;
+        }
+
+        function deletes(id, username) {
+
+            // 암호화된 유저의 아이디를 디코딩 하여 jsonPayload라는 변수에 담음
+            let token = $.cookie('mytoken')
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            let parsing_id = jsonPayload.substring(7, jsonPayload.length - 2)
+
+            if (parsing_id == username) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/message/delete",
+                    data: { id_give: id },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('삭제 완료');
+                            window.location.reload();
+                        } else {
+                            alert('서버 오류');
+                        }
+                    }
+                })
+            }
+            else {
+                alert('삭제 권한이 없습니다.')
+            }
         }
 
         function isValidContents(contents) {
@@ -79,18 +135,6 @@
             return true;
         }
 
-        function genRandomName(length) {
-            let result = '';
-            let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                let number = Math.random() * charactersLength;
-                let index = Math.floor(number);
-                result += characters.charAt(index);
-            }
-            return result;
-        }
-
         function writePost() {
             let contents = $('#contents').val();
 
@@ -98,12 +142,11 @@
                 return;
             }
 
-            let username = genRandomName(10);
-
             $.ajax({
                 type: "POST",
                 url: "/message",
-                data: { 'username_give': username, 'contents_give': contents },
+                headers: { 'token_give': $.cookie('mytoken') },
+                data: { 'contents_give': contents },
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert(response['msg']);
@@ -123,9 +166,25 @@
         }
 
         function editPost(username) {
-            showEdits(username);
-            let contents = $(`#${username}-contents`).text();
-            $(`#${username}-textarea`).val(contents);
+
+            // 암호화된 유저의 아이디를 디코딩 하여 jsonPayload라는 변수에 담음
+            let token = $.cookie('mytoken')
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            let parsing_id = jsonPayload.substring(7, jsonPayload.length - 2)
+
+            if (parsing_id == username) {
+                showEdits(username);
+                let contents = $(`#${username}-contents`).text();
+                $(`#${username}-textarea`).val(contents);
+            }
+            else {
+                alert('수정 권한이 없습니다.')
+            }
         }
 
         function showEdits(username) {
@@ -202,15 +261,14 @@
 <body>
     <div class="wrap">
         <div class="header">
-            <h1>새가 날아든다</h1>
+            <h1>메모장</h1>
             <p>
-                <button onclick="openclose()" type="button" class="btn btn-outline-info btn-sm">공유하고 싶은 소식</button>을
-                입력해주세요.
+                <button onclick="openclose()" type="button" class="btn btn-outline-info btn-sm">기록하고 싶은 글</button>입력.
             </p>
         </div>
         <div id="post-box">
             <div class="area-write">
-                <textarea placeholder="공유하고 싶은 소식을 입력해주세요" name="contents" id="contents" cols="30" rows="10"></textarea>
+                <textarea placeholder="기록하고싶은 글 입력" name="contents" id="contents" cols="30" rows="10"></textarea>
                 <button class="btn btn-danger" onclick="writePost()">작성하기</button>
             </div>
         </div>

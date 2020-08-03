@@ -224,18 +224,58 @@ def get_messages():
     #messages = list(db.messages.find({'created_at': {
     #                '$gte': date_before, '$lte': date_now}}, {'_id': False}).sort('created_at', -1))
     
-    messages = list(db.messages.find({}, {'_id':0}).sort('created_at', -1))
+    # stocks = objectIdDecoder(list(db.stocks.find({'id' : payload['id']}, {'id' : 0})))
+    # return jsonify({'result':'success', 'stocks':stocks})
+
+    messages = objectIdDecoder(list(db.messages.find({}).sort('created_at', -1)))
     
     return jsonify({'result': 'success', 'messages': messages})
+
+#url: "/message/delete",
+
+# @app.route('/stock', methods=['DELETE'])
+# def delete():
+
+#     #클라이언트가 삭제하고자 하는 데이터의 id를 받음
+
+#     id_receive = ObjectId(request.form['id_give'])
+#     db.stocks.delete_one({'_id' : id_receive})
+    
+#     # id_receive = request.form['id_give'] 
+#     # print(id_receive)
+#     # db.articles.remove({'_id' : ObjectId(id_receive)})
+#     return jsonify({'result' : 'success'})
+
+
+def objectIdDecoder(list) :
+    results = []
+    for doc in list:
+        doc['_id'] = str(doc['_id'])
+        results.append(doc)
+    
+    return results
+
+
+@app.route('/message/delete', methods=["DELETE"])
+def delete_message():
+
+    id_receive = ObjectId(request.form['id_give'])
+    db.messages.delete_one({'_id' : id_receive})
+
+    return jsonify({'result' : 'success'})
 
 
 @app.route('/message', methods=["POST"])
 def set_message():
-    username_receive = request.form['username_give']
+
+    token_receive = request.headers['token_give']
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+    #username_receive = request.form['username_give']
     contents_receive = request.form['contents_give']
 
     doc = {
-        'username': username_receive,
+        'username': payload['id'],
         'contents': contents_receive,
         'created_at': datetime.datetime.now()
     }
@@ -417,15 +457,6 @@ def stock_giving():
 
     stocks = objectIdDecoder(list(db.stocks.find({'id' : payload['id']}, {'id' : 0})))
     return jsonify({'result':'success', 'stocks':stocks})
-
-
-def objectIdDecoder(list) :
-    results = []
-    for doc in list:
-        doc['_id'] = str(doc['_id'])
-        results.append(doc)
-    
-    return results
 
 @app.route('/stock', methods=['DELETE'])
 def delete():
