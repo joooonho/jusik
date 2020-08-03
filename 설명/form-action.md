@@ -14,9 +14,9 @@
 * 설명
   <br>
   
-  ![screenshot1](/이미지/0803-1.JPG)
+  ![screenshot1](/이미지/0803-1.PNG)
   
   <br>
   
-  ![screenshot2](/이미지/0803-2.JPG)
+  ![screenshot2](/이미지/0803-2.PNG)
   
