@@ -11,3 +11,12 @@
   - `<form action = "URL">`
   - URL은 form data를 서버로 보낼 때, 해당 데이터가 도착할 URL
 
+* 설명
+  <br>
+  
+  ![screenshot1](/이미지/0803-1.JPG)
+  
+  <br>
+  
+  ![screenshot2](/이미지/0803-2.JPG)
+  
