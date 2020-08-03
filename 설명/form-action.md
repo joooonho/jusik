@@ -25,5 +25,7 @@
   <br>
   
   ![screenshot2](/설명/이미지/0803-2.PNG)
+  
   <br>
+  
   이전 페이지로부터 넘겨받은 데이터 symbol을 {{ result['symbol'] }}로 사용한다.
