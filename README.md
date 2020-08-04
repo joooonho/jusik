@@ -56,6 +56,7 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 4) interests.html : 관심 종목들을 볼 수 있는 페이지
 5) login.html : 로그인 페이지 
 6) register.html : 회원가입 페이지 
+7) board.html : 메모 게시판
 
 <h4>3. /static/</h4>
 
