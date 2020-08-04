@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 from bson import ObjectId
 
-from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+from pymongo import MongoClient           # pymongo를 임포트 하기(패키지 인스톨을 먼저 한다.)
 from datetime import datetime, timedelta
 
 ###################### 이메일 인증 위한 패키지 
