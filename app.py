@@ -94,8 +94,8 @@ def board():
 @app.route('/api/email_auth', methods=['POST'])
 def api_auth():
 
-    me = "butcher3130@gmail.com"
-    my_password = "foavkq250"
+    me = "이메일"
+    my_password = "비밀번호"
     
     you = request.form['email_give']
     id_receive = request.form['id_give']
