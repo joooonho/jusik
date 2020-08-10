@@ -94,8 +94,8 @@ def board():
 @app.route('/api/email_auth', methods=['POST'])
 def api_auth():
 
-    me = "이메일"
-    my_password = "비밀번호"
+    me = "butcher3130@gmail.com"
+    my_password = "foavkq250"
     
     you = request.form['email_give']
     id_receive = request.form['id_give']
@@ -219,32 +219,10 @@ def api_valid():
 
 @app.route('/message', methods=["GET"])
 def get_messages():
-    #date_now = datetime.datetime.now()
-    #date_before = date_now - timedelta(days=1)
-    #messages = list(db.messages.find({'created_at': {
-    #                '$gte': date_before, '$lte': date_now}}, {'_id': False}).sort('created_at', -1))
-    
-    # stocks = objectIdDecoder(list(db.stocks.find({'id' : payload['id']}, {'id' : 0})))
-    # return jsonify({'result':'success', 'stocks':stocks})
 
     messages = objectIdDecoder(list(db.messages.find({}).sort('created_at', -1)))
     
     return jsonify({'result': 'success', 'messages': messages})
-
-#url: "/message/delete",
-
-# @app.route('/stock', methods=['DELETE'])
-# def delete():
-
-#     #클라이언트가 삭제하고자 하는 데이터의 id를 받음
-
-#     id_receive = ObjectId(request.form['id_give'])
-#     db.stocks.delete_one({'_id' : id_receive})
-    
-#     # id_receive = request.form['id_give'] 
-#     # print(id_receive)
-#     # db.articles.remove({'_id' : ObjectId(id_receive)})
-#     return jsonify({'result' : 'success'})
 
 
 def objectIdDecoder(list) :
@@ -271,7 +249,6 @@ def set_message():
     token_receive = request.headers['token_give']
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
-    #username_receive = request.form['username_give']
     contents_receive = request.form['contents_give']
 
     doc = {
@@ -308,7 +285,7 @@ def listing():
     return jsonify({'result':'success', 'articles':article})
 
     # 1. 모든 document 찾기 & _id 값은 출력에서 제외하기
-    # 2. articles라는 키 값으로 영화정보 내려주기
+    # 2. articles라는 키 값으로 기사정보 내려주기
    
 
 ## API 역할을 하는 부분
@@ -316,10 +293,7 @@ def listing():
 @app.route('/article', methods=['POST'])
 def saving():
 
-    #url_receive = request.form['url_give']  # 클라이언트로부터 url을 받는 부분
-    #comment_receive = request.form['comment_give']  # 클라이언트로부터 comment를 받는 부분
-
-    url_receive = request.form['url_give']
+    url_receive = request.form['url_give'] # 클라이언트로부터 url을 받는 부분
 	# 2. meta tag를 스크래핑하기
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(url_receive, headers=headers)
@@ -330,7 +304,6 @@ def saving():
     title = temp_url.select_one('a.title').text
     
     #db에 동일한 기사가 없다면 
-    # if title != db.articles.find_one({})['title']:
     if db.stock_articles.find_one({'title' : title}) is None:
         db.stock_articles.delete_many({})
         description = temp_url.select_one('p').text
@@ -360,7 +333,6 @@ def index_saving():
     #반환할 리스트
   
     # 지수 가져오기    
-    #url_receive = request.form['url_give_dow']
     data = requests.get(url_receive, headers=headers)
     soup = BeautifulSoup(data.text, 'html.parser')
             
@@ -466,9 +438,6 @@ def delete():
     id_receive = ObjectId(request.form['id_give'])
     db.stocks.delete_one({'_id' : id_receive})
     
-    # id_receive = request.form['id_give'] 
-    # print(id_receive)
-    # db.articles.remove({'_id' : ObjectId(id_receive)})
     return jsonify({'result' : 'success'})
 
 
@@ -479,9 +448,6 @@ def result():
         result = request.form
         return render_template("dashboard.html", result = result)
     
-    # elif request.method == 'GET':
-    #     print(result)
-    #     return jsonify({'result' : 'success', 'symbol' : result})
 
 @app.route('/stock_price', methods=['POST'])
 def stock_price():
@@ -496,8 +462,6 @@ def stock_price():
     # tr들만 뽑아내기
     prices = soup.select('#Col1-1-HistoricalDataTable-Proxy > section > div > table > tbody > tr')
 
-    # temp = prices.select_one('td > span').text
-    # print(temp)
     
     # 1번째가 날짜, 2번쨰가 시가, 3번째가 고가, 4번째가 저가, 5번째가 종가, 6번째가 매매 규모
 
@@ -683,28 +647,7 @@ def get_total_sell_record():
 
     return jsonify({'result' : 'success'}, {'get_total_sell' : result})
 
-# #관심 종목에 추가된 종목 실시간 주가 가져오기
-# @app.route('/interest_price', methods=['POST'])
-# def interest_price():
 
-#     # url 받아오기
-#     url_receive = request.form['url_give']
-    
-#     # 현재 주가 데이터 가져오기 
-#     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
-#     data = requests.get(url_receive, headers=headers)
-#     soup = BeautifulSoup(data.text, 'html.parser')
-    
-#     # 주가 변동 사항 가져오기
-#     prices = soup.select('#quote-header-info > div > div > div > span')
-    
-#     price = prices[1].text
-#     rate = prices[2].text
-
-#     price_rate = {'price' : price, 'rate' : rate}
-
-
-#     return jsonify({'result' : 'success', 'price_rate' : price_rate})
 
 @app.route('/api/articles', methods=['POST', 'GET', 'DELETE'])
 def articles():
@@ -715,9 +658,6 @@ def articles():
       id_receive = ObjectId(request.form['id_give'])
       db.test_articles.delete_one({'_id' : id_receive})
     
-      # id_receive = request.form['id_give'] 
-      # print(id_receive)
-      # db.articles.remove({'_id' : ObjectId(id_receive)})
       return jsonify({'result' : 'success'})
 
    token_receive = request.headers['token_give']
