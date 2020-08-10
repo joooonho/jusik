@@ -77,17 +77,19 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 위에서 부터 
 
+<br>
+
 - 매수 기록
 - 매도 기록
 - 매수 종합
 - 매도 종합
 - 관심 종목에 추가된 종목들
 - 관심 기사에 추가된 기사들
-- 사용자들
+- 가입된 사용자들
 
 <br>
 
-1. 매수 기록 
+##### 1. 매수 기록 
 
 <br>
 
@@ -100,4 +102,81 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
+##### 2. 매도 기록 
 
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-7.PNG)
+
+<br>
+
+각 사용자들이 매도한 종목들이 저장되어있다. 
+
+<br>
+<br>
+
+##### 3. 매수 종합
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-6.PNG)
+
+<br>
+
+각 사용자들이 매수한 종목들의 매수 종합 기록이 저장되어있다. 
+
+<br>
+<br>
+
+##### 4. 매도 종합
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-5.PNG)
+
+<br>
+
+각 사용자들이 매도한 종목들의 매도 종합 기록이 저장되어있다. 
+
+<br>
+<br>
+
+
+##### 5. 관심 종목
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-4.PNG)
+
+<br>
+
+각 사용자들이 관심종목에 추가한 종목들이 저장되어 있다.
+
+<br>
+<br>
+
+##### 6. 관심 기사
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-3.PNG)
+
+<br>
+
+각 사용자들이 관심기사에 추가한 기사들이 저장되어 있다.
+
+<br>
+<br>
+
+##### 7. 가입된 사용자들
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-2.PNG)
+
+<br>
+
+가입된 사용자들의 정보가 저장되어있다. 
+
+<br>
+<br>
