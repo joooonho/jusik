@@ -17,6 +17,7 @@ from random import randint
 ######################
 
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
+#client = MongoClient('mongodb://아이디:비밀번호@15.164.96.143', 27017)
 db = client.dbsparta                      # 'dbsparta'라는 이름의 db를 만듭니다.
 
 ############################로그인에 필요한 패키지 등
@@ -125,7 +126,14 @@ def api_auth():
     ## 여기에서 코드 작성이 끝납니다. 
 
     # Gmail 관련 필요한 정보를 획득합니다.
-    s = smtplib.SMTP_SSL('smtp.gmail.com')
+    
+    # ssl 방식
+    #s = smtplib.SMTP_SSL('smtp.gmail.com')
+    
+    # tls 방식
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+
     # Gmail에 로그인합니다. 
     s.login(me, my_password)
     # 메일을 전송합니다.
