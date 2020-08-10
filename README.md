@@ -63,3 +63,41 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <h4>3. /static/</h4>
 
 각 html 파일과 연결되는 js 파일과 css 파일들이 존재한다.
+
+<br>
+
+<h2><li>데이터 베이스 구조</li></h2>
+
+<br>
+
+1. 데이터 베이스 목록
+
+![1](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-db.PNG)
+
+<br>
+위에서 부터 
+
+- 매수 기록
+- 매도 기록
+- 매수 종합
+- 매도 종합
+- 관심 종목에 추가된 종목들
+- 관심 기사에 추가된 기사들
+- 사용자들
+
+<br>
+
+1. 매수 기록 
+
+<br>
+
+![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-8.PNG)
+
+<br>
+
+각 사용자들이 매수한 종목들이 저장되어있다. 
+
+<br>
+<br>
+
+
