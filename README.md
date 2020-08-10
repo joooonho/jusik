@@ -78,6 +78,7 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 위에서 부터 
 
 <br>
+<br>
 
 - 매수 기록
 - 매도 기록
@@ -89,7 +90,7 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <br>
 
-##### 1. 매수 기록 
+#### 1. 매수 기록 
 
 <br>
 
@@ -102,11 +103,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-##### 2. 매도 기록 
+#### 2. 매도 기록 
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-7.PNG)
+![3](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-7.PNG)
 
 <br>
 
@@ -115,11 +116,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-##### 3. 매수 종합
+#### 3. 매수 종합
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-6.PNG)
+![4](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-6.PNG)
 
 <br>
 
@@ -128,11 +129,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-##### 4. 매도 종합
+#### 4. 매도 종합
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-5.PNG)
+![5](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-5.PNG)
 
 <br>
 
@@ -142,11 +143,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 
 
-##### 5. 관심 종목
+#### 5. 관심 종목
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-4.PNG)
+![6](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-4.PNG)
 
 <br>
 
@@ -155,11 +156,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-##### 6. 관심 기사
+#### 6. 관심 기사
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-3.PNG)
+![7](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-3.PNG)
 
 <br>
 
@@ -168,11 +169,11 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-##### 7. 가입된 사용자들
+#### 7. 가입된 사용자들
 
 <br>
 
-![2](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-2.PNG)
+![8](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-2.PNG)
 
 <br>
 
