@@ -107,7 +107,7 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <br>
 
-![3](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-7.PNG)
+![3](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-%EB%A7%A4%EB%8F%84.PNG)
 
 <br>
 
@@ -133,7 +133,7 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <br>
 
-![5](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-5.PNG)
+![5](https://github.com/butcher313/jusik/blob/master/%EC%84%A4%EB%AA%85/%EC%9D%B4%EB%AF%B8%EC%A7%80/0810-%EB%A7%A4%EB%8F%84%EC%A2%85%ED%95%A9.PNG)
 
 <br>
 
