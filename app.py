@@ -94,8 +94,8 @@ def board():
 @app.route('/api/email_auth', methods=['POST'])
 def api_auth():
 
-    me = "butcher3130@gmail.com"
-    my_password = "foavkq250"
+    me = "이메일 주소"
+    my_password = "비밀번호"
     
     you = request.form['email_give']
     id_receive = request.form['id_give']
@@ -217,6 +217,7 @@ def api_valid():
 ###########################################################################
 ################################################################# 게시판 api
 
+#메세지를 가져옴
 @app.route('/message', methods=["GET"])
 def get_messages():
 
@@ -224,7 +225,7 @@ def get_messages():
     
     return jsonify({'result': 'success', 'messages': messages})
 
-
+# object Id 디코딩하는 함수
 def objectIdDecoder(list) :
     results = []
     for doc in list:
@@ -233,7 +234,7 @@ def objectIdDecoder(list) :
     
     return results
 
-
+# 메세지 삭제
 @app.route('/message/delete', methods=["DELETE"])
 def delete_message():
 
@@ -242,7 +243,7 @@ def delete_message():
 
     return jsonify({'result' : 'success'})
 
-
+# 메세지 등록
 @app.route('/message', methods=["POST"])
 def set_message():
 
@@ -261,7 +262,7 @@ def set_message():
 
     return jsonify({'result': 'success', 'msg': '메시지 작성에 성공하였습니다!'})
 
-
+# 메세지 수정
 @app.route('/message/edit', methods=["POST"])
 def edit_message():
     username_receive = request.form['username_give']
@@ -350,14 +351,14 @@ def index_saving():
     return jsonify({'result': 'success', 'result_index' : result_index})
 
 
-## API 역할을 하는 부분
+#다우지수 가져오기
 @app.route('/index', methods=['GET'])
 def index_giving(): 
 
     dow_index = db.dow_index.find_one({}, {'_id' : 0})
     return jsonify({'result':'success', 'dow_index':dow_index})
 
-
+# 종목 검색
 @app.route('/search', methods=['POST'])
 def stock_searching():
 
@@ -398,6 +399,7 @@ def stock_searching():
         return jsonify({'result' : 'success', 'dictionary' : datas})
 
 
+# 종목을 관심종목에 추가
 @app.route('/stock', methods=['POST'])
 def stock_saving():
 
@@ -421,7 +423,7 @@ def stock_saving():
 
     return jsonify({'result' : 'success'})
 
-
+# 종목 정보 가져오기
 @app.route('/stock', methods=['GET'])
 def stock_giving():
     token_receive = request.headers['token_give']
@@ -430,6 +432,7 @@ def stock_giving():
     stocks = objectIdDecoder(list(db.stocks.find({'id' : payload['id']}, {'id' : 0})))
     return jsonify({'result':'success', 'stocks':stocks})
 
+# 관심종목에서 종목 삭제
 @app.route('/stock', methods=['DELETE'])
 def delete():
 
@@ -440,7 +443,7 @@ def delete():
     
     return jsonify({'result' : 'success'})
 
-
+# 관심 종목 페이지에서 종목 '보기' 버튼을 누르면 해당 종목의 차트를 볼 수 있는 페이지로 간다. 
 @app.route('/dashboard',methods = ['POST', 'GET'])
 def result():
 
@@ -448,7 +451,7 @@ def result():
         result = request.form
         return render_template("dashboard.html", result = result)
     
-
+# 주가 데이터 가져오기
 @app.route('/stock_price', methods=['POST'])
 def stock_price():
 
@@ -481,7 +484,7 @@ def stock_price():
     else :
         return jsonify({'result' : 'success', 'dictionary' : datas})
 
-
+# 주식 현재 가격 가져오기 
 @app.route('/current_price', methods=['POST'])
 def current_price():
     
@@ -648,7 +651,7 @@ def get_total_sell_record():
     return jsonify({'result' : 'success'}, {'get_total_sell' : result})
 
 
-
+# 관심기사 삭제, 가져오기, 포스팅 하기
 @app.route('/api/articles', methods=['POST', 'GET', 'DELETE'])
 def articles():
 
