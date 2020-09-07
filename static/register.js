@@ -1,6 +1,25 @@
 // 간단한 회원가입 함수입니다.
 // 아이디, 비밀번호, 닉네임을 받아 DB에 저장합니다.
 function email_auth() {
+
+    //이메일 인증 버튼을 누르면 버튼을 없애버림
+    $('#email_auth_button').remove();
+
+    let id =  $('#userid').val();
+    let pw = $('#userpw').val();
+    let name = $('#usernick').val();
+    let email = $('#useremail').val();
+    
+    let inputBox = [['id', id], ['pw', pw], ['nickName', name], ['email', email]];
+
+    for(let i = 0; i < inputBox.length; i++) {
+        if(inputBox[i][1] == ''){
+            alert(inputBox[i][0] + '을(를) 입력해주세요.')
+            return;
+        }
+    }
+    
+
     $.ajax({
         type: "POST",
         url: "/api/email_auth",
@@ -18,7 +37,6 @@ function email_auth() {
                             </div>`
                     
                     let button = `<button id = "${number}" class="btn btn-primary" onclick="number_auth(this.id)">인증</button>`
-                    $('#email_auth_button').remove();
                     
                     $('#user').append(temp_html);
                     $('#user').append(button);
@@ -31,6 +49,8 @@ function email_auth() {
 
 function number_auth(number) {
     if($('#auth_num').val() == number){
+        
+        $(number).remove();
         let button = `<button class="btn btn-primary" onclick="register()">회원가입</button>`
         alert('인증 완료')
         $('#user').append(button)
