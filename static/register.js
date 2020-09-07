@@ -19,7 +19,6 @@ function email_auth() {
         }
     }
     
-
     $.ajax({
         type: "POST",
         url: "/api/email_auth",
@@ -36,7 +35,7 @@ function email_auth() {
                                 <input type="text" class="form-control" id="auth_num" placeholder="인증 번호">
                             </div>`
                     
-                    let button = `<button id = "${number}" class="btn btn-primary" onclick="number_auth(this.id)">인증</button>`
+                    let button = `<button id = "auth-button" class="btn btn-primary" onclick="number_auth('${number}')">인증</button>`
                     
                     $('#user').append(temp_html);
                     $('#user').append(button);
@@ -49,8 +48,8 @@ function email_auth() {
 
 function number_auth(number) {
     if($('#auth_num').val() == number){
-        
-        $(number).remove();
+
+        $('#auth-button').remove();
         let button = `<button class="btn btn-primary" onclick="register()">회원가입</button>`
         alert('인증 완료')
         $('#user').append(button)
