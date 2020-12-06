@@ -349,13 +349,17 @@ def index_saving():
 
     # 날짜 가져오기
     temp_date = soup.select_one('#quotes_summary_current_data > div > div > div > span.bold').text
+   
+    try :
     # 전날 대비 +/- 수치 가져오기
-    temp_change = soup.select_one('#quotes_summary_current_data > div > div > div > span.arial_20').text
-    temp_percent = soup.select_one('#quotes_summary_current_data > div > div > div > span.arial_20.parentheses').text
-    
+    temp_change = soup.select_one('#quotes_summary_current_data > div > div > div > div > span.arial_20').text
+    temp_percent = soup.select_one('#quotes_summary_current_data > div > div > div > div > span.arial_20.parentheses').text
                 
     result_index = { 'index' : temp_index, 'date' : temp_date, 'change' : temp_change, 'percent' : temp_percent}
 
+    except :
+	result_index = { 'index' : temp_index, 'date' : temp_date, 'change' : 'null', 'percent' : 'null'}
+	
     return jsonify({'result': 'success', 'result_index' : result_index})
 
 
