@@ -3,7 +3,7 @@
 
 <h1>주식 웹서비스</h1>
 
-<h2><li>서비스 개요</li></h2> 
+<h2><li> 서비스 개요</li></h2> 
 
 <h4>1. 서비스 소개</h4>
 
@@ -188,8 +188,8 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 <br>
 <br>
 
-#### 8. 개선 내용
-
+<h2><li> 개선 내용 </li></h2>  
+ 
 <br>
 
   - [flask 이메일 인증 회원가입 기능 추가](https://github.com/Yang-Joon-Ho/TIL/blob/master/flask/Flask&mongoDB%EC%9D%B4%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D.md)
