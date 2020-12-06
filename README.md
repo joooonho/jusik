@@ -192,4 +192,4 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <br>
 
-[flask 예외처리 추가 + AWS 인스턴스 접속 불가 문제 해결](https://github.com/Yang-Joon-Ho/jusik/tree/master/Feedback)
+  - [flask 예외처리 추가 + AWS 인스턴스 접속 불가 문제 해결](https://github.com/Yang-Joon-Ho/jusik/tree/master/Feedback)
