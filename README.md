@@ -192,4 +192,8 @@ flask 서버를 구동하여 mongo DB와 클라이언트와 통신 하는 곳.
 
 <br>
 
+  - [flask 이메일 인증 회원가입 기능 추가](https://github.com/Yang-Joon-Ho/TIL/blob/master/flask/Flask&mongoDB%EC%9D%B4%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D.md)
+
+  - [flask 메모 기능 추가](https://github.com/Yang-Joon-Ho/TIL/blob/master/flask/%EB%A9%94%EB%AA%A8%EA%B8%B0%EB%8A%A5%EC%B6%94%EA%B0%80.md)
+
   - [flask 예외처리 추가 + AWS 인스턴스 접속 불가 문제 해결](https://github.com/Yang-Joon-Ho/jusik/tree/master/Feedback)
